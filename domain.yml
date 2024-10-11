@@ -8,6 +8,43 @@ intents:
   - mood_great
   - mood_unhappy
   - bot_challenge
+  - ask_for_help
+  - ask_courses_department
+  - ask_course_info
+  - ask_department_info
+  - inquire_fees
+
+entities:
+  - department
+  - course_name
+  - semester
+  - fee_type
+
+slots:
+  department:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: department
+  course_name:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: course_name
+  semester:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: semester
+  fee_type:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: fee_type
 
 responses:
   utter_greet:
@@ -28,6 +65,32 @@ responses:
 
   utter_iamabot:
   - text: "I am a bot, powered by Rasa."
+
+  utter_ask_for_help:
+    - text: "I’m here to help! Is there anything else you need assistance with? Feel free to ask anything!"
+
+  utter_default:
+    - text: "Hmm, I’m not sure about that. But I can help with course information or department details. Anything else on your mind?"
+
+  utter_courses_offered:
+    - text: "Here are the courses offered by the [department]:\n\n{courses_list}"
+    
+  utter_department_info:
+    - text: "Here’s some info about the [department] department:\n{department_info}"
+    
+  utter_course_info:
+    - text: "Here's the scoop on the [course name] course:\n{course_info}"
+
+  utter_fees_info:
+    - text: "Here are the fee details:\n{fee_details}"
+
+actions:
+  - action_ask_for_help
+  - action_course_info
+  - action_department_info
+  - action_list_courses
+  - action_fetch_fees
+
 
 session_config:
   session_expiration_time: 60

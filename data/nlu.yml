@@ -89,3 +89,39 @@ nlu:
     - are you a human?
     - am I talking to a bot?
     - am I talking to a human?
+
+- intent: ask_for_help
+  examples: |
+    - Can you help me with anything else?
+    - Is there something else I can ask you about?
+
+- intent: ask_courses_department
+  examples: |
+    - What courses does [Civil Engineering](department) offer?
+    - Tell me the courses available in [Computer Applications](department)
+      
+- intent: ask_course_info
+  examples: |
+    - What about the [Data Structures](course_name) course?
+    - Tell me more about [B.Sc.- Animation and Multimedia](course_name)
+
+- intent: ask_department_info
+  examples: |
+    - Tell me more about [Physics](department)
+    - What information do you have on [Computer Engineering](department)?
+    - I need details on the [Mathematics](department) department
+    - Can you provide information on [Electrical Engineering](department)?
+    - What can you tell me about the [Civil Engineering](department)?
+    - I want to know about [Information Technology](department)
+
+- intent: inquire_fees
+  examples: |
+    - What is the fee for the [B.Tech](course_name) in [Semester 1](semester)?
+    - Can you tell me the fees for [M.Tech](course_name) for both semesters?
+    - What is the total fee for [MBA](course_name)?
+    - How much do I need to pay for the entire year of [BCA](course_name)?
+    - Give me the fees for both semesters of [B.Tech](course_name).
+    - I want the yearly fee for [B.Sc](course_name).
+    - Give me the [Semester 2 fee](fee_type) for [MBA](course_name).
+    - How much do I need to pay for the [total fee](fee_type) of [B.Sc](course_name)?
+    - Can you tell me the [total fee](fee_type) for [M.Tech](course_name)?

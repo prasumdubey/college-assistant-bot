@@ -28,3 +28,53 @@ stories:
   - action: utter_did_that_help
   - intent: deny
   - action: utter_goodbye
+
+- story: ask for help
+  steps:
+  - intent: ask_for_help
+  - action: action_ask_for_help
+
+- story: list courses
+  steps:
+  - intent: ask_courses_department
+    entities:
+    - department: Civil Engineering
+  - action: action_list_courses
+
+- story: course info
+  steps:
+  - intent: ask_course_info
+    entities:
+    - course_name: Data Structures
+  - action: action_course_info
+
+- story: department info
+  steps:
+  - intent: ask_department_info
+    entities:
+    - department: Computer Applications
+  - action: action_department_info
+
+- story: ask_for_semester_fees
+  steps:
+  - intent: inquire_fees
+    entities:
+    - course_name: "B.Tech"
+    - semester: "Semester 1"
+  - action: action_fetch_fees
+
+- story: ask_for_total_fees
+  steps:
+  - intent: inquire_fees
+    entities:
+    - course_name: "MBA"
+    - fee_type: "total fee"
+  - action: action_fetch_fees
+
+- story: ask_for_semester_2_fees
+  steps:
+  - intent: inquire_fees
+    entities:
+    - course_name: "M.Tech"
+    - semester: "Semester 2"
+  - action: action_fetch_fees
