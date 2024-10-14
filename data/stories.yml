@@ -55,26 +55,17 @@ stories:
     - department: Computer Applications
   - action: action_department_info
 
-- story: ask_for_semester_fees
+- story: ask fee for a specific course in a specific semester
   steps:
-  - intent: inquire_fees
+  - intent: ask_fee
     entities:
-    - course_name: "B.Tech"
-    - semester: "Semester 1"
-  - action: action_fetch_fees
+    - course_name: "B.Tech - Computer Engineering"
+    - semester: 1
+  - action: action_get_fee
 
-- story: ask_for_total_fees
+- story: ask total fee for a specific course
   steps:
-  - intent: inquire_fees
+  - intent: ask_fee
     entities:
-    - course_name: "MBA"
-    - fee_type: "total fee"
-  - action: action_fetch_fees
-
-- story: ask_for_semester_2_fees
-  steps:
-  - intent: inquire_fees
-    entities:
-    - course_name: "M.Tech"
-    - semester: "Semester 2"
-  - action: action_fetch_fees
+    - course_name: "M.Tech - Computer Science & Engineering"
+  - action: action_get_fee

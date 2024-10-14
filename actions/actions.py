@@ -158,10 +158,10 @@ class ActionDepartmentInfo(Action):
 
         return []
     
-class ActionFetchFees(Action):
+class ActionGetFee(Action):
 
     def name(self) -> str:
-        return "action_fetch_fees"
+        return "action_get_fee"
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
@@ -169,57 +169,53 @@ class ActionFetchFees(Action):
 
         course_name = tracker.get_slot('course_name')
         semester = tracker.get_slot('semester')
-        fee_type = tracker.get_slot('fee_type')  # Added for total fee inquiry
 
-        conn = get_db_connection()
-        cursor = conn.cursor(dictionary=True)
+        if course_name:
+            conn = get_db_connection()
+            cursor = conn.cursor(dictionary=True)
 
-        # Get all unique course names for fuzzy matching
-        cursor.execute("SELECT DISTINCT course_name FROM courses")
-        all_courses = [course['course_name'] for course in cursor.fetchall()]
+            # Get all unique course names for fuzzy matching
+            cursor.execute("SELECT DISTINCT course_name FROM courses")
+            all_courses = [course['course_name'] for course in cursor.fetchall()]
 
-        # Find the closest match for the user's input
-        course_match = get_closest_match(course_name, all_courses) if course_name else None
+            # Find the closest match for the user's input
+            course_match = get_closest_match(course_name, all_courses)
 
-        if course_match:
-            if semester == "total fee":
-                # Query to get total fees for the matched course
-                query = """
-                    SELECT SUM(total_semester_fee) as total_fee
-                    FROM fees
-                    WHERE course_id = (SELECT course_id FROM courses WHERE course_name = %s)
-                """
-                cursor.execute(query, (course_match,))
-                total_fee = cursor.fetchone()
+            if course_match:
+                # Fetch course_id for the matched course
+                cursor.execute("SELECT course_id FROM courses WHERE course_name = %s", (course_match,))
+                course_id_result = cursor.fetchone()
+                
+                if course_id_result:
+                    course_id = course_id_result['course_id']
+                    
+                    if semester is not None:  # If semester is provided
+                        # Fetch fees for the specified semester
+                        cursor.execute("SELECT total_semester_fee FROM fees WHERE course_id = %s AND semester = %s", (course_id, semester))
+                        fee_result = cursor.fetchone()
 
-                if total_fee and total_fee['total_fee'] is not None:
-                    dispatcher.utter_message(text=f"The total fee for the {course_match} course is {total_fee['total_fee']}.")
+                        if fee_result:
+                            semester_fee = fee_result['total_semester_fee']
+                            dispatcher.utter_message(text=f"The fee for {course_match} in semester {semester} is ₹{semester_fee}.")
+                        else:
+                            dispatcher.utter_message(text=f"Sorry, I couldn’t find the fee details for {course_match} in semester {semester}.")
+                    else:  # If no semester is provided, fetch total fee
+                        cursor.execute("SELECT SUM(total_semester_fee) AS total_fee FROM fees WHERE course_id = %s", (course_id,))
+                        total_fee_result = cursor.fetchone()
+
+                        if total_fee_result:
+                            total_fee = total_fee_result['total_fee']
+                            dispatcher.utter_message(text=f"The total fee for {course_match} is ₹{total_fee}.")
+                        else:
+                            dispatcher.utter_message(text=f"Sorry, I couldn’t find the total fee details for {course_match}.")
                 else:
-                    dispatcher.utter_message(text=f"Sorry, I couldn’t find the total fee for the {course_match} course.")
+                    dispatcher.utter_message(text=f"Sorry, I couldn’t find the course ID for {course_match}.")
             else:
-                # Query to get all fees for the specific semester
-                query = """
-                    SELECT tuition_fee, dev_fee, exam_fee, regn_other_charges, job_readiness_fee, total_semester_fee
-                    FROM fees
-                    WHERE course_id = (SELECT course_id FROM courses WHERE course_name = %s) AND semester = %s
-                """
-                cursor.execute(query, (course_match, semester))
-                fee_details = cursor.fetchone()
+                dispatcher.utter_message(text=f"Sorry, I couldn’t find a course matching '{course_name}'.")
 
-                if fee_details:
-                    response = f"Here are the fee details for {course_match} in {semester}:\n"
-                    response += f"Tuition Fee: {fee_details['tuition_fee']}\n"
-                    response += f"Development Fee: {fee_details['dev_fee']}\n"
-                    response += f"Exam Fee: {fee_details['exam_fee']}\n"
-                    response += f"Registration & Other Charges: {fee_details['regn_other_charges']}\n"
-                    response += f"Job Readiness Fee: {fee_details['job_readiness_fee']}\n"
-                    response += f"Total Semester Fee: {fee_details['total_semester_fee']}"
-                    dispatcher.utter_message(text=response)
-                else:
-                    dispatcher.utter_message(text=f"Sorry, I couldn’t find fee details for {course_match} in {semester}.")
+            cursor.close()
+            conn.close()
         else:
-            dispatcher.utter_message(text=f"Sorry, I couldn’t find a course matching '{course_name}'.")
+            dispatcher.utter_message(text="Please specify a course name.")
 
-        cursor.close()
-        conn.close()
         return []

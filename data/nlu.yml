@@ -114,14 +114,25 @@ nlu:
     - What can you tell me about the [Civil Engineering](department)?
     - I want to know about [Information Technology](department)
 
-- intent: inquire_fees
+
+- intent: ask_fee
   examples: |
-    - What is the fee for the [B.Tech](course_name) in [Semester 1](semester)?
-    - Can you tell me the fees for [M.Tech](course_name) for both semesters?
-    - What is the total fee for [MBA](course_name)?
-    - How much do I need to pay for the entire year of [BCA](course_name)?
-    - Give me the fees for both semesters of [B.Tech](course_name).
-    - I want the yearly fee for [B.Sc](course_name).
-    - Give me the [Semester 2 fee](fee_type) for [MBA](course_name).
-    - How much do I need to pay for the [total fee](fee_type) of [B.Sc](course_name)?
-    - Can you tell me the [total fee](fee_type) for [M.Tech](course_name)?
+    - What is the fee for [B.Tech - Computer Engineering](course_name)?
+    - Can you tell me the fee for [M.Tech - Computer Engineering](course_name)?
+    - What is the fee for [M.Tech - Computer Science & Engineering](course_name) in [1](semester) semester?
+    - I want to know the fee for [B.Tech - Information Technology](course_name) in [1](semester)
+    - Tell me the fee for [M.Tech - Power Electronics & Drives](course_name) in [2](semester)
+    - What is the total fee for [B.Tech - Robotics and Artificial Intelligence](course_name)?
+    - What is the fee for [B.Tech - Computer Engineering](course_name) in [1](semester)?
+    - Can you tell me the fee for [M.Tech - Computer Science & Engineering](course_name) in [2](semester)?
+    - What is the fee for [B.Tech - Civil Engineering](course_name)?
+    - Can you provide the fee details for [M.Tech - VLSI Design](course_name)?
+    - How much do I need to pay for [MBA - Marketing](course_name) this semester?
+    - What’s the semester fee for [B.Tech - Electronics and Communication](course_name)?
+    - How much is the total fee for [M.Tech - Software Engineering](course_name)?
+    - Please tell me the fee structure for [B.Tech - Mechanical Engineering](course_name) for the second semester.
+
+
+regex:
+  - name: semester
+    pattern: \b(1|2)\b

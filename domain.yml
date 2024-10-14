@@ -12,13 +12,12 @@ intents:
   - ask_courses_department
   - ask_course_info
   - ask_department_info
-  - inquire_fees
+  - ask_fee
 
 entities:
   - department
   - course_name
   - semester
-  - fee_type
 
 slots:
   department:
@@ -34,17 +33,15 @@ slots:
       - type: from_entity
         entity: course_name
   semester:
-    type: text
+    type: categorical
+    values:
+      - "1"
+      - "2"
     influence_conversation: true
     mappings:
       - type: from_entity
         entity: semester
-  fee_type:
-    type: text
-    influence_conversation: true
-    mappings:
-      - type: from_entity
-        entity: fee_type
+  
 
 responses:
   utter_greet:
@@ -89,7 +86,7 @@ actions:
   - action_course_info
   - action_department_info
   - action_list_courses
-  - action_fetch_fees
+  - action_get_fee
 
 
 session_config:
