@@ -6,12 +6,10 @@ intents:
   - affirm
   - deny
   - mood_great
-  - mood_unhappy
-  - bot_challenge
-  - ask_for_help
-  - ask_courses_department
   - ask_course_info
   - ask_department_info
+  - ask_departments
+  - nlu_fallback
   - ask_fee
 
 entities:
@@ -41,53 +39,46 @@ slots:
     mappings:
       - type: from_entity
         entity: semester
-  
 
 responses:
   utter_greet:
-  - text: "Hey! How are you?"
-
-  utter_cheer_up:
-  - text: "Here is something to cheer you up:"
-    image: "https://i.imgur.com/nGF1K8f.jpg"
+    - text: "Hey! How are you?"
 
   utter_did_that_help:
-  - text: "Did that help you?"
+    - text: "Did that help you?"
 
   utter_happy:
-  - text: "Great, carry on!"
+    - text: "Great, carry on!"
 
   utter_goodbye:
-  - text: "Bye"
+    - text: "Bye"
 
-  utter_iamabot:
-  - text: "I am a bot, powered by Rasa."
+  utter_departments:
+    - text: "Sure! Here are the departments at our university: [List of departments]"
 
-  utter_ask_for_help:
-    - text: "I’m here to help! Is there anything else you need assistance with? Feel free to ask anything!"
-
-  utter_default:
-    - text: "Hmm, I’m not sure about that. But I can help with course information or department details. Anything else on your mind?"
+  utter_fallback:
+    - text: |
+        I'm sorry, I didn’t quite understand that. Here's what I can help you with:
+        - Information on departments (e.g., "Tell me about the Computer Engineering department")
+        - Course lists (e.g., "What courses does Civil Engineering offer?")
+        - Fee details (e.g., "What's the fee for B.Tech - Computer Engineering?")
+        Could you please clarify?
 
   utter_courses_offered:
     - text: "Here are the courses offered by the [department]:\n\n{courses_list}"
-    
-  utter_department_info:
-    - text: "Here’s some info about the [department] department:\n{department_info}"
-    
+
   utter_course_info:
     - text: "Here's the scoop on the [course name] course:\n{course_info}"
 
   utter_fees_info:
     - text: "Here are the fee details:\n{fee_details}"
 
-actions:
-  - action_ask_for_help
+actions:  
+  - action_provide_departments
+  - action_fallback
   - action_course_info
-  - action_department_info
   - action_list_courses
   - action_get_fee
-
 
 session_config:
   session_expiration_time: 60

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>J.C. Bose University Chatbot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="chat-container">
+        <!-- Sidebar for Updates and Notices -->
+        <div class="sidebar">
+            <h2>Updates & Notices</h2>
+            <ul>
+                <li>📢 Admissions for 2024 are open!</li>
+                <li>🎓 Convocation on December 10, 2024</li>
+                <li>📚 Library closed on November 25, 2024</li>
+                <li>📝 Semester results released. Check online.</li>
+            </ul>
+        </div>
+
+        <!-- Chat Section -->
+        <div class="chat-section">
+            <div class="chat-header">
+                <h1>J.C. Bose University Chatbot</h1>
+            </div>
+            <div class="chat-display" id="chat-display">
+                <!-- Chat messages will appear here -->
+            </div>
+            <div class="chat-input-container">
+                <textarea id="user-input" placeholder="Ask your question here..."></textarea>
+                <button id="send-button">Send</button>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

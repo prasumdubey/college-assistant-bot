@@ -66,53 +66,59 @@ nlu:
     - so good
     - so perfect
 
-- intent: mood_unhappy
-  examples: |
-    - my day was horrible
-    - I am sad
-    - I don't feel very well
-    - I am disappointed
-    - super sad
-    - I'm so sad
-    - sad
-    - very sad
-    - unhappy
-    - not good
-    - not very good
-    - extremly sad
-    - so saad
-    - so sad
 
-- intent: bot_challenge
-  examples: |
-    - are you a bot?
-    - are you a human?
-    - am I talking to a bot?
-    - am I talking to a human?
 
-- intent: ask_for_help
-  examples: |
-    - Can you help me with anything else?
-    - Is there something else I can ask you about?
+# - intent: ask_for_help
+#   examples: |
+#     - Can you help me with anything else?
+#     - Is there something else I can ask you about?
 
-- intent: ask_courses_department
-  examples: |
-    - What courses does [Civil Engineering](department) offer?
-    - Tell me the courses available in [Computer Applications](department)
+# - intent: ask_courses_department
+#   examples: |
+#     - What courses does [Civil Engineering](department) offer?
+#     - Tell me the courses available in [Computer Applications](department)
       
 - intent: ask_course_info
   examples: |
     - What about the [Data Structures](course_name) course?
-    - Tell me more about [B.Sc.- Animation and Multimedia](course_name)
+    - Tell me more about [B.Sc.- Animation and Multimedia](course_name) course
+    - Can you provide information on the [Data Science](course_name) course?
+    - I want details about the [Machine Learning](course_name) course.
+    - Give me information on [B.Tech - Computer Engineering](course_name).
+    - What are the details for the [MBA - Finance](course_name) course?
+    - Could you tell me more about the [M.Sc. - Physics](course_name) program?
+    - Tell me about the [Artificial Intelligence](course_name) course.
+    - Do you have any info on the [Cybersecurity](course_name) course?
+    - Explain the [B.Sc. - Computer Science](course_name) course.
+    - Can you give a brief about the [M.Tech - Data Engineering](course_name)?
+    - What does the [Biotechnology](course_name) program entail?
+    - I’d like to know about the [Environmental Science](course_name) course.
+    - Could you share more about the [Civil Engineering](course_name) course?
+    - What is included in the [Psychology](course_name) course?
+    - What can you tell me about [B.A. - History](course_name)?
+    - What does the [Game Development](course_name) course cover?
+    - I’m interested in [Marketing](course_name). What’s it about?
+    - How about the [B.Arch - Architecture](course_name) course?
+    - I need information on the [Business Analytics](course_name) course.
 
 - intent: ask_department_info
   examples: |
-    - Tell me more about [Physics](department)
-    - What information do you have on [Computer Engineering](department)?
+    - Tell me more about [Physics](department) department
+    - What courses does [Civil Engineering](department) offer?
+    - Tell me the courses available in [Computer Applications](department)
+    - What information do you have on [Computer Engineering](department) department?
     - I need details on the [Mathematics](department) department
-    - Can you provide information on [Electrical Engineering](department)?
-    - What can you tell me about the [Civil Engineering](department)?
-    - I want to know about [Information Technology](department)
+    - Can you provide information on [Electrical Engineering](department) department?
+    - What can you tell me about the [Civil Engineering](department) department?
+    - I want to know about [Information Technology](department) department
+
+- intent: ask_departments
+  examples: |
+    - Tell me the departments present in the university
+    - What are the departments?
+    - List the departments in the university
+    - What departments do you have?
+    -how many department does university have?
 
 
 - intent: ask_fee

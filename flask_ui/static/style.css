@@ -1,0 +1,146 @@
+/* General Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-size: cover;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Chat Container */
+.chat-container {
+    display: flex;
+    width: 90%;
+    height: 90%;
+    max-width: 1200px;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 25%;
+    background-color: #003366;
+    color: white;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.sidebar h2 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    border-bottom: 2px solid white;
+    padding-bottom: 10px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    font-size: 14px;
+}
+
+.sidebar ul li {
+    margin: 15px 0;
+    line-height: 1.6;
+}
+
+/* Chat Section */
+.chat-section {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Chat Header */
+.chat-header {
+    background-color: #cda41b;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Chat Display */
+.chat-display {
+    flex: 1;
+    padding: 20px;
+    background: url('{{ url_for('static', filename='5th.jpg') }}') no-repeat center center;
+    background-size: contain;
+    overflow-y: auto;
+    background: #f4f4f9;
+    position: relative;
+    border: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Common Chat Bubble Styling */
+.chat-bubble {
+    display: inline-block;
+    margin: 5px 0;
+    padding: 10px 15px;
+    border-radius: 15px;
+    font-size: 14px;
+    line-height: 1.5;
+    max-width: 70%;
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+/* User Bubble */
+.chat-bubble.user {
+    background-color: #d1e7ff;
+    align-self: flex-end;
+    text-align: left;
+}
+
+/* Bot Bubble */
+.chat-bubble.bot {
+    background-color: #c8e6c9;
+    align-self: flex-start;
+    text-align: left;
+}
+
+/* Chat Input */
+.chat-input-container {
+    display: flex;
+    padding: 10px;
+    background-color: #fff;
+    border-top: 1px solid #ddd;
+}
+
+.chat-input-container textarea {
+    flex: 1;
+    height: 60px;
+    resize: none;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+.chat-input-container button {
+    background-color: #cf9820;
+    color: white;
+    border: none;
+    padding: 15px 20px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.chat-input-container button:hover {
+    background-color: #e6a34c;
+}

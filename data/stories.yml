@@ -9,34 +9,26 @@ stories:
   - intent: mood_great
   - action: utter_happy
 
-- story: sad path 1
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - intent: affirm
-  - action: utter_happy
 
-- story: sad path 2
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - intent: deny
-  - action: utter_goodbye
 
-- story: ask for help
+- story: user asks for departments
   steps:
-  - intent: ask_for_help
-  - action: action_ask_for_help
+  - intent: ask_departments
+  - action: action_provide_departments
+
+- story: unclear user input
+  steps:
+  - intent: nlu_fallback
+  - action: utter_fallback
+
+# - story: ask for help
+#   steps:
+#   - intent: ask_for_help
+#   - action: action_ask_for_help
 
 - story: list courses
   steps:
-  - intent: ask_courses_department
+  - intent: ask_department_info
     entities:
     - department: Civil Engineering
   - action: action_list_courses
@@ -48,12 +40,12 @@ stories:
     - course_name: Data Structures
   - action: action_course_info
 
-- story: department info
-  steps:
-  - intent: ask_department_info
-    entities:
-    - department: Computer Applications
-  - action: action_department_info
+# - story: department info
+#   steps:
+#   - intent: ask_department_info
+#     entities:
+#     - department: Computer Applications
+#   - action: action_department_info
 
 - story: ask fee for a specific course in a specific semester
   steps:

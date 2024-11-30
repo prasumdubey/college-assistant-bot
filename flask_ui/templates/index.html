@@ -1,79 +1,73 @@
-<!-- flask_ui/templates/index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat with Rasa Bot</title>
+    <title>Welcome - J.C. Bose University Chatbot</title>
     <style>
         body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
             font-family: Arial, sans-serif;
+            background: #f4f4f9;
         }
-        .chat-container {
-            width: 300px;
-            margin: 0 auto;
+
+        .welcome-container {
             text-align: center;
+            opacity: 1;
+            transition: opacity 0.5s ease;
         }
-        .chat-box {
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin-bottom: 10px;
-            height: 300px;
-            overflow-y: scroll;
+
+        .welcome-container.hidden {
+            opacity: 0;
         }
-        .chat-box div {
-            margin: 5px 0;
+
+        .welcome-container h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #0066cc;
         }
-        .user-message {
-            text-align: right;
-            color: blue;
+
+        .welcome-container p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
         }
-        .bot-message {
-            text-align: left;
-            color: green;
+
+        .start-button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: white;
+            background-color: #0066cc;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .start-button:hover {
+            background-color: #005bb5;
         }
     </style>
 </head>
 <body>
-    <div class="chat-container">
-        <h2>Chat with the College Assistant Bot</h2>
-        <div id="chat-box" class="chat-box"></div>
-        <form id="chat-form">
-            <input type="text" id="message-input" placeholder="Type your message here..." required>
-            <button type="submit">Send</button>
-        </form>
+    <div class="welcome-container" id="welcome-container">
+        <h1>Welcome to J.C. Bose University Chatbot</h1>
+        <p>We are here to assist you with your queries.</p>
+        <a href="javascript:void(0)" class="start-button" onclick="startChat()">Get Started</a>
     </div>
 
     <script>
-        document.getElementById("chat-form").addEventListener("submit", function (e) {
-            e.preventDefault();
-            var userMessage = document.getElementById("message-input").value;
-
-            var chatBox = document.getElementById("chat-box");
-            var userMessageDiv = document.createElement("div");
-            userMessageDiv.classList.add("user-message");
-            userMessageDiv.textContent = userMessage;
-            chatBox.appendChild(userMessageDiv);
-
-            document.getElementById("message-input").value = "";
-
-            fetch("/chat", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded",
-                },
-                body: "message=" + encodeURIComponent(userMessage),
-            })
-            .then(response => response.json())
-            .then(data => {
-                var botMessageDiv = document.createElement("div");
-                botMessageDiv.classList.add("bot-message");
-                botMessageDiv.textContent = data.response;
-                chatBox.appendChild(botMessageDiv);
-
-                chatBox.scrollTop = chatBox.scrollHeight;
-            });
-        });
+        function startChat() {
+            const container = document.getElementById('welcome-container');
+            container.classList.add('hidden'); // Add fade-out class
+            setTimeout(() => {
+                window.location.href = '/chat'; // Navigate after the fade
+            }, 500); // Match this with CSS transition duration
+        }
     </script>
 </body>
 </html>
